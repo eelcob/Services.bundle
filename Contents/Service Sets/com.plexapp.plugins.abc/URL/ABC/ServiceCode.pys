@@ -75,6 +75,7 @@ def MediaObjectsForURL(url):
 	]
 
 ####################################################################################################
+@indirect
 def PlayVideo(url, bitrate):
 
 	video_id = url.split('/')[-2]
@@ -86,7 +87,14 @@ def PlayVideo(url, bitrate):
 	streamer = 'rtmp://cp88586.edgefcs.net/abcondemand'
 	clip = data.xpath('//videos/video[@bitrate="' + closest + '"]')[0].get('src')
 
-	return Redirect(RTMPVideoURL(streamer, clip))
+	return ObjectContainer(objects = [
+		VideoClipObject(
+			url = url,
+			items = [
+				MediaObject(parts=[PartObject(key=RTMPVideoURL(streamer, clip))])
+			]
+		)
+	])
 
 ####################################################################################################
 def TestURLs():
