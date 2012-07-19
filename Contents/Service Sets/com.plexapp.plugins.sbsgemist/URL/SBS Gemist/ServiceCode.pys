@@ -64,12 +64,10 @@ def MetadataObjectForURL(url):
 
 ####################################################################################################
 def MediaObjectsForURL(url):
-
 	return [
 		MediaObject(
-			audio_codec = AudioCodec.AAC,
-			video_codec = VideoCodec.H264,
-			container = 'mp4',
+			video_resolution = 'sd',
+			audio_channels = 2,
 			parts = [PartObject(key=Callback(PlayVideo, url = url))]
 		)
 	]
